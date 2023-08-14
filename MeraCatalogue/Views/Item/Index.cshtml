@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MeraCatalogue.Models.ProductItem>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout_mobile.cshtml";
+}
+
+<style>
+    .card-icon {
+        position: relative;
+        float: right;
+        padding: 0px 10px;
+    }
+</style>
+
+<button class="btn btn-primary">
+    <i class="fas fa-info-circle"></i> @Html.ActionLink("Create", "Create")
+</button>
+
+
+@*@model IEnumerable<MeraCatalogue.Models.ProductItem>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MRP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BulkPricing)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinimumQuantity)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MRP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BulkPricing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinimumQuantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>

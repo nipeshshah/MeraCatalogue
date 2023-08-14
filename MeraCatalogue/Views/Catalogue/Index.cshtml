@@ -1,0 +1,167 @@
+﻿@model IEnumerable<MeraCatalogue.Models.Catalogue>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout_mobile.cshtml";
+}
+
+<style>
+    .card-icon {
+        position: relative;
+        float: right;
+        padding: 0px 10px;
+    }
+</style>
+
+<button class="btn btn-primary">
+    <i class="fas fa-info-circle"></i> @Html.ActionLink("Create", "Create") 
+</button>
+
+<div class="container mt-4">
+    <h1>My Catalogues</h1>
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <span style="padding:10px">
+                            @Html.DisplayFor(modelItem => item.CatalogueNo)
+                        </span>
+                        <i class="card-icon fas fa-info-circle"></i>
+                        <i class="card-icon fas fa-share"></i>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Title: @Html.DisplayFor(modelItem => item.Title)
+                        </p>
+                        <p class="card-text">Products Count: 50</p>
+                        <p class="card-text">Shared With: Team A</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="container mt-4">
+
+</div>
+
+@*<div class="rounded shadow bg-white p-5 tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-how-much-can-i-recive" role="tabpanel"
+             aria-labelledby="pills-how-much-can-i-recive-tab">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-1 order-md-0">
+                    @foreach (var item in Model)
+                    {
+                        <div class="content-block">
+                            <h3 class="mb-4">@Html.DisplayFor(modelItem => item.CatalogueNo)</h3>
+                            <div class="content">
+                                <p>
+                                    <b>@Html.DisplayNameFor(model => model.Title)</b>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </p>
+                                <p>
+                                    <b>@Html.DisplayNameFor(model => model.Description)</b>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-6 order-0 order-md-1 mb-5 mt-md-0">
+                    <div class="image-block text-center">
+                        <img loading="lazy" decoding="async"
+                             src="~/Content/images/payment-info.png" alt="How Much Can I Recive?" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade " id="pills-how-much-does-it-costs" role="tabpanel"
+             aria-labelledby="pills-how-much-does-it-costs-tab">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-1 order-md-0">
+                    <div class="content-block">
+                        <h3 class="mb-4">How Much Does It Costs?</h3>
+                        <div class="content">
+                            <p>
+                                Lorem ipsum dolor sit amet, consec tetasssur adipiscing elit. Tellus integer proin nisl pretium,
+                                vestibulum dictum blandit risus. Nisl commodo
+                            </p>
+                            <p>
+                                turpis vivamus donec. Id congue vesti bualum odio dignissim at quisque viverra. Non semper in sed
+                                quisque dui. Platea posuere ullamcorper id fames ut sed urna cursus eget. Neque, vel
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 order-0 order-md-1 mb-5 mt-md-0">
+                    <div class="image-block text-center">
+                        <img loading="lazy" decoding="async" src="~/Content/images/illustration-2.png" alt="How Much Does It Costs?" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade " id="pills-how-do-i-repay" role="tabpanel"
+             aria-labelledby="pills-how-do-i-repay-tab">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-1 order-md-0">
+                    <div class="content-block">
+                        <h3 class="mb-4">How Do I Repay?</h3>
+                        <div class="content">
+                            <p>
+                                Lorem ipsum dolor sit amet, consec tetasssur adipiscing elit. Tellus integer proin nisl pretium,
+                                vestibulum dictum blandit risus. Nisl commodo
+                            </p>
+                            <p>
+                                turpis vivamus donec. Id congue vesti bualum odio dignissim at quisque viverra. Non semper in sed
+                                quisque dui. Platea posuere ullamcorper id fames ut sed urna cursus eget. Neque, vel
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 order-0 order-md-1 mb-5 mt-md-0">
+                    <div class="image-block text-center">
+                        <img loading="lazy" decoding="async" src="~/Content/images/illustration-1.png" alt="How Do I Repay?" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CatalogueNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CatalogueId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CatalogueId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CatalogueId })
+                </td>
+            </tr>
+        }
+
+    </table>*@
