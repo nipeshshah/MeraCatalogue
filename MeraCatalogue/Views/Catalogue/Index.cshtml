@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<MeraCatalogue.Models.Catalogue>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_layout_mobile.cshtml";
-}
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout_mobile.cshtml"; }
 
 <style>
     .card-icon {
@@ -11,42 +9,96 @@
         float: right;
         padding: 0px 10px;
     }
+
+    .footer {
+        background-color: #333;
+        color: white;
+        padding: 5px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .footer-icon {
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+        display: block;
+        padding: 10px;
+    }
+
+        .footer-icon:hover {
+            background-color: #555;
+        }
+
 </style>
 
 <button class="btn btn-primary">
-    <i class="fas fa-info-circle"></i> @Html.ActionLink("Create", "Create") 
+    <i class="fas fa-info-circle"></i> @Html.ActionLink("Create", "Create")
 </button>
 
 <div class="container mt-4">
     <h1>My Catalogues</h1>
     @foreach (var item in Model)
     {
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-header">
-                        <span style="padding:10px">
-                            @Html.DisplayFor(modelItem => item.CatalogueNo)
-                        </span>
-                        <i class="card-icon fas fa-info-circle"></i>
-                        <i class="card-icon fas fa-share"></i>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Title: @Html.DisplayFor(modelItem => item.Title)
-                        </p>
-                        <p class="card-text">Products Count: 50</p>
-                        <p class="card-text">Shared With: Team A</p>
-                    </div>
-                </div>
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <span style="padding:10px">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </span>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Unique Id: @Html.DisplayFor(modelItem => item.CatalogueNo)
+                </p>
+                <p class="card-text">Products Count: 50</p>
+                <p class="card-text">Shared With: Team A</p>
+            </div>
+            <div class="card-footer">
+                <i class="card-icon fas fa-info-circle"></i>
+                <i class="card-icon fas fa-share"></i>
+
             </div>
         </div>
-    }
+    </div>
+</div>}
 </div>
 
-<div class="container mt-4">
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a href="#" class="footer-icon">
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
+            <div class="col">
+                <a href="#" class="footer-icon">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+            <div class="col">
+                <a href="#" class="footer-icon">
+                    <i class="fas fa-heart"></i>
+                </a>
+            </div>
+            <div class="col">
+                <a href="#" class="footer-icon">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+            <div class="col">
+                <a href="#" class="footer-icon">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
 
-</div>
 
 @*<div class="rounded shadow bg-white p-5 tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-how-much-can-i-recive" role="tabpanel"

@@ -5,6 +5,15 @@ using System.Web;
 
 namespace MeraCatalogue.Models
 {
+
+    public class UserLoginModel
+    {
+
+        public string Username { get; set; }//Field to store the UserName
+
+        public string Password { get; set; }//Field to store the PasswordName
+
+    }
     public class CatalogueList
     {
         private List<Catalogue> _catalog;
@@ -24,10 +33,14 @@ namespace MeraCatalogue.Models
     }
     public class Catalogue
     {
+        public Catalogue() {
+            Products = new List<ProductItem>();
+        }
         public int CatalogueId { get; set; }
         public string CatalogueNo { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public List<ProductItem> Products { get; set; }
     }
     public class ProductItemList
     {

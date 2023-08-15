@@ -1,0 +1,55 @@
+﻿@model MeraCatalogue.Models.Catalogue
+@{
+    ViewBag.Title = "Share";
+    Layout = "~/Views/Shared/_layout_mobile.cshtml";
+}
+
+<h2>@Model.Title</h2>
+<style>
+    .member-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .member-name {
+        flex: 1;
+    }
+
+    .btn-share {
+        flex: 1;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="container mt-4">
+        <h1>Member List</h1>
+        @Html.AntiForgeryToken()
+
+        <form>
+            <input type="text" id="searchInput" placeholder="Search for members...">
+            <input type="submit" id="Share" value="Share" class="btn-share" />
+            <ul id="memberList" class="list-group mt-3">
+                <li class="list-group-item member-item">
+                    <span class="member-name">John Doe</span>
+                    <label>
+                        <input type="checkbox" name="chkUser" value="John Doe" class="member-checkbox">
+                    </label>
+                </li>
+                <li class="list-group-item member-item">
+                    <span class="member-name">Jane Smith</span>
+                    <label>
+                        <input name="chkUser" value="Jane Smith"  type="checkbox" class="member-checkbox">
+                    </label>
+                </li>
+                <li class="list-group-item member-item">
+                    <span class="member-name">Michael Johnson</span>
+                    <label>
+                        <input name="chkUser" value="Michael Johnson" type="checkbox" class="member-checkbox">
+                    </label>
+                </li>
+                <!-- Add more members here -->
+            </ul>
+        </form>
+    </div>
+}

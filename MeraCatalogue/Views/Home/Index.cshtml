@@ -1,5 +1,55 @@
 ﻿@{ ViewBag.Title = "Home Page";
-                Layout = "~/Views/Shared/_layout_mobile.cshtml"; }
+    Layout = "~/Views/Shared/_layout_mobile.cshtml"; }
+
+<style>
+    .dashboard-block {
+        border: 1px solid #ccc;
+        padding: 20px;
+        text-align: center;
+        margin: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        color: #333;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dashboard-block i {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+</style>
+
+<div class="container mt-4">
+    <h1>Dashboard</h1>
+    <div class="row">
+        <div class="col-md-3">
+            <a href="Catalogue" class="dashboard-block">
+                <i class="fas fa-list-ul"></i>
+                <h5>Catalogues</h5>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="Item" class="dashboard-block">
+                <i class="fas fa-box"></i>
+                <h5>Items</h5>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="Share" class="dashboard-block">
+                <i class="fas fa-share"></i>
+                <h5>Share</h5>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="#" class="dashboard-block">
+                <i class="fas fa-users"></i>
+                <h5>Shared Catalogues</h5>
+            </a>
+        </div>
+    </div>
+</div>
+
 
 <div class="container mt-4">
     <h1>Dashboard</h1>

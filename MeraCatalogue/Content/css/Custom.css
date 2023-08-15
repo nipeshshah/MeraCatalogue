@@ -1,0 +1,30 @@
+﻿/*.content {
+    padding: 20px;
+    text-align: center;
+}
+
+.bottom-navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: #333;
+    padding: 10px 0;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    flex: 1;
+    padding: 10px;
+}
+
+    .nav-item i {
+        font-size: 24px;
+        display: block;
+        margin-bottom: 5px;
+    }
+*/

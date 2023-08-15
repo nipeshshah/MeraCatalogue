@@ -29,6 +29,33 @@ namespace MeraCatalogue.Controllers
             }
         }
 
+        public ActionResult Share()
+        {
+            BLHelper bLHelper = new BLHelper();
+            Catalogue catalogue = bLHelper.cataHelper.GetById(3);
+            
+            return View(catalogue);
+        }
+
+        [HttpPost]
+        public ActionResult Share(FormCollection collection)
+        {
+            var allIdsToRemove = collection["chkUser"] != null
+            ? collection["chkUser"].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(t => t)
+            .ToList()
+            : new List<string>();
+            return View("Share");
+        }
+
+        public ActionResult Details()
+        {
+            BLHelper bLHelper = new BLHelper();
+            Catalogue catalogue = bLHelper.cataHelper.GetById(2);
+            catalogue.Products = bLHelper.itemHelper.GetByCatalogueId(catalogue.CatalogueId);
+            return View(catalogue);
+        }
+
         [HttpGet]
         public ActionResult Create()
         {

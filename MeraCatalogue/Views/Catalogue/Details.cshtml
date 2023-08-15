@@ -1,0 +1,84 @@
+﻿@model MeraCatalogue.Models.Catalogue
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_layout_mobile.cshtml";
+}
+
+<style>
+    .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin: 10px;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    .product-img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product-title {
+        font-size: 1.2rem;
+        margin: 10px 0;
+    }
+
+    .product-price {
+        font-size: 1rem;
+        color: #007bff;
+        font-weight: bold;
+    }
+</style>
+
+<h3 class="text-center mb-4">@Model.Title</h3>
+<div class="text-left p-4">
+    <i>
+        No.: @Model.CatalogueNo<br />
+        @Model.Description<br />
+        Total @Model.Products.Count Items
+    </i>
+</div>
+
+<div class="container mt-4">
+    @foreach (var item in Model.Products)
+    {
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <span style="padding:10px">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Unique Id: @Html.DisplayFor(modelItem => item.ItemNo)
+                        </p>
+                        <p class="card-text">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </p>
+                        <p class="card-text">
+                            MRP: @Html.DisplayFor(modelItem => item.MRP)
+                        </p>
+                        <p class="card-text">
+                            Min Qty: @Html.DisplayFor(modelItem => item.MinimumQuantity)
+                        </p>
+                        <p class="card-text">
+                            Bulk Rate: @Html.DisplayFor(modelItem => item.BulkPricing)
+                        </p>
+                        <p class="card-text">Other Catalogues
+                            <ul>
+                                <li>Catalogue 1</li>
+                                <li>Catalogue 2</li>
+                                <li>Catalogue 3</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <i class="card-icon fas fa-share"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }  
+</div>
