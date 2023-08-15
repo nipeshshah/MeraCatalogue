@@ -45,6 +45,22 @@ namespace MeraCatalogue.BL
             }
         }
 
+        public UserHelper _userHelper;
+        public UserHelper userHelper
+        {
+            get
+            {
+                if (_userHelper == null)
+                    _userHelper = new UserHelper();
+                return _userHelper;
+            }
+
+            set
+            {
+                _userHelper = value;
+            }
+        }
+
         private CataHelper _cataHelper;
         public CataHelper cataHelper
         {

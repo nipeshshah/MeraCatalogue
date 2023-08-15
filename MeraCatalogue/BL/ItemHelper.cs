@@ -78,7 +78,7 @@ namespace MeraCatalogue.BL
                 List<ProductItem> products = new List<ProductItem>();
                 ProductItem item1 = new ProductItem()
                 {
-                    ItemNo = "ABH/ITM/001/00001",
+                    ItemNo = "ABH/001",
                     Title = "Jaipuri Bedsheet 90\" x 108\"",
                     Description = "Bedsheet Catalogue, for Size 90\" x 108\"",
                     MRP = 650,

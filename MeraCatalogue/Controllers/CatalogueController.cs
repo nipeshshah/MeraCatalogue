@@ -11,18 +11,18 @@ namespace MeraCatalogue.Controllers
     public class CatalogueController : BaseController
     {
         // GET: Catalogue
-        public ActionResult Index(string ViewName, string SearchCriteria)
+        public ActionResult Index(string UserId, string ViewName, string SearchCriteria)
         {
             SearchCriteria = "P1|I10";
             BLHelper bLHelper = new BLHelper();
             if (ViewName == "SharedItems")
             {
-                List<Catalogue> items = bLHelper.cataHelper.GetList(1, 10);
+                List<Catalogue> items = bLHelper.cataHelper.GetList(UserId, 1, 10);
                 return View(items);
             }
             else // Default My View
             {
-                List<Catalogue> items = bLHelper.cataHelper.GetList(1, 10);
+                List<Catalogue> items = bLHelper.cataHelper.GetList(UserId, 1, 10);
                 if(items == null)
                     items = new List<Catalogue>();
                 return View(items);
@@ -48,12 +48,14 @@ namespace MeraCatalogue.Controllers
             return View("Share");
         }
 
-        public ActionResult Details()
+        public ActionResult Details(string UserId, int CataloguId)
         {
             BLHelper bLHelper = new BLHelper();
-            Catalogue catalogue = bLHelper.cataHelper.GetById(2);
-            catalogue.Products = bLHelper.itemHelper.GetByCatalogueId(catalogue.CatalogueId);
-            return View(catalogue);
+            ViewCatalogueDetails view = new ViewCatalogueDetails();
+            view.catalogue = bLHelper.cataHelper.GetById(CataloguId);
+            view.catalogue.Products = bLHelper.itemHelper.GetByCatalogueId(view.catalogue.CatalogueId);
+            view.allItems = bLHelper.itemHelper.GetList(1, 10);
+            return View(view);
         }
 
         [HttpGet]
@@ -69,11 +71,11 @@ namespace MeraCatalogue.Controllers
             bLHelper.cataHelper.Create(new Catalogue()
             {
                 //CatalogueId = new Random().Next(1, 9999).ToString(), //Company code + Unique Identification Number
-                CatalogueNo = collection[1],
+                UserId = collection[1],
                 Title = collection[2],
                 Description = collection[3]
             });
-            return View();
+            return View("Index");
         }
 
 

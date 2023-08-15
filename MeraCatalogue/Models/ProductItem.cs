@@ -6,12 +6,15 @@ using System.Web;
 namespace MeraCatalogue.Models
 {
 
-    public class UserLoginModel
+    public class GoogleUserProfile
     {
-
-        public string Username { get; set; }//Field to store the UserName
-
-        public string Password { get; set; }//Field to store the PasswordName
+        public int Id { get; set; }
+        public string GoogleId { get; set; }
+        public string Name { get; set; }
+        public string GivenName { get; set; }
+        public string FamilyName { get; set; }
+        public string Image { get; set; }
+        public string Locale { get; set; }
 
     }
     public class CatalogueList
@@ -31,11 +34,20 @@ namespace MeraCatalogue.Models
             }
         }
     }
+
+    public class ViewCatalogueDetails
+    {
+        public Catalogue catalogue { get; set; }
+        public List<ProductItem> allItems { get; set; }
+    }
+
     public class Catalogue
     {
-        public Catalogue() {
+        public Catalogue()
+        {
             Products = new List<ProductItem>();
         }
+        public string UserId { get; set; }
         public int CatalogueId { get; set; }
         public string CatalogueNo { get; set; }
         public string Title { get; set; }

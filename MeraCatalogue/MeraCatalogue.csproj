@@ -155,9 +155,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
+    <!--<Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    </Reference>-->
+    <Folder Include="App_Data\" />
+    <Folder Include="DB\5\" />
+    <Folder Include="NewFolder1\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -168,6 +172,7 @@
     <Compile Include="BL\CataHelper.cs" />
     <Compile Include="BL\ItemHelper.cs" />
     <Compile Include="BL\JsonHelper.cs" />
+    <Compile Include="BL\UserHelper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CatalogueController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -323,12 +328,7 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="DB\5\" />
-    <Folder Include="NewFolder1\" />
-    <Folder Include="Views\Base\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

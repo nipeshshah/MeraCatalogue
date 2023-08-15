@@ -10,7 +10,7 @@ namespace MeraCatalogue.BL
 {
     public class CataHelper
     {
-        public List<Catalogue> GetList(int pageNo, int pageSize)
+        public List<Catalogue> GetList(string UserId, int pageNo, int pageSize)
         {
             if (ConfigurationManager.AppSettings["WithDatabase"].ToString() == "false")
             {
@@ -35,7 +35,7 @@ namespace MeraCatalogue.BL
             //string fileData = fw.Catalog.ReadAll("5");
             DataSet ds = fw.db.ExecuteProcedureReader("GetCatalogs", new System.Data.SqlClient.SqlParameter[]
             {
-               fw.db.SqlParameter("UserId", System.Data.SqlDbType.Int, 5)
+               fw.db.SqlParameter("UserId", System.Data.SqlDbType.NVarChar, 50, UserId)
             });
 
             List<Catalogue> items = fw.db.ToEntity<Catalogue>(ds.Tables[0]);
@@ -46,10 +46,9 @@ namespace MeraCatalogue.BL
         internal void Create(Catalogue catalogue)
         {
             BaseFramework fw = new BaseFramework();
-            int result = fw.db.ExecuteNonQueryProcedure("InsertCatalogue", new System.Data.SqlClient.SqlParameter[]
+            fw.db.ExecuteNonQueryProcedure("InsertCatalogue", new System.Data.SqlClient.SqlParameter[]
             {
-               fw.db.SqlParameter("UserId", System.Data.SqlDbType.NVarChar, 50, "5"),
-                              fw.db.SqlParameter("CatalogueNo", System.Data.SqlDbType.NVarChar, 255, catalogue.CatalogueNo),
+               fw.db.SqlParameter("UserId", System.Data.SqlDbType.NVarChar, 50, catalogue.UserId),
                               fw.db.SqlParameter("Title", System.Data.SqlDbType.NVarChar, 255, catalogue.Title),
                                              fw.db.SqlParameter("Description", System.Data.SqlDbType.NVarChar, 500, catalogue.Description)
             });

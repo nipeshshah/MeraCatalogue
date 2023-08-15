@@ -34,8 +34,11 @@
 
 </style>
 
-<button class="btn btn-primary">
-    <i class="fas fa-info-circle"></i> @Html.ActionLink("Create", "Create")
+<button class="btn" style="float:right">
+    <i class="fas fa-info-circle"></i>
+        <a href="Catalogue/Create"><i class="fas fa-info-circle"></i>Create</a>
+        @*<a class="btn btn-outline-primary">@Html.ActionLink("Create", "Create")</a>
+            <i class="fas fa-info-circle">@Html.ActionLink("Create", "Create")</i>*@
 </button>
 
 <div class="container mt-4">
@@ -58,9 +61,9 @@
                 <p class="card-text">Shared With: Team A</p>
             </div>
             <div class="card-footer">
-                <i class="card-icon fas fa-info-circle"></i>
+                <i class="card-icon fas fa-trash"></i>
+                <a href="/Catalogue/Details?UserId=104580318530181501782&CataloguId=@item.CatalogueId"><i class="card-icon fas fa-info-circle"></i></a>
                 <i class="card-icon fas fa-share"></i>
-
             </div>
         </div>
     </div>

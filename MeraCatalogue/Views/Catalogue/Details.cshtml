@@ -1,8 +1,6 @@
-﻿@model MeraCatalogue.Models.Catalogue
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_layout_mobile.cshtml";
-}
+﻿@model MeraCatalogue.Models.ViewCatalogueDetails
+@{ ViewBag.Title = "Details";
+                Layout = "~/Views/Shared/_layout_mobile.cshtml"; }
 
 <style>
     .product-card {
@@ -30,55 +28,148 @@
     }
 </style>
 
-<h3 class="text-center mb-4">@Model.Title</h3>
+<h3 class="text-center mb-4">@Model.catalogue.Title</h3>
 <div class="text-left p-4">
     <i>
-        No.: @Model.CatalogueNo<br />
-        @Model.Description<br />
-        Total @Model.Products.Count Items
+        No.: @Model.catalogue.CatalogueNo<br />
+        @Model.catalogue.Description<br />
+        Total @Model.catalogue.Products.Count Items
     </i>
 </div>
 
-<div class="container mt-4">
-    @foreach (var item in Model.Products)
-    {
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-header">
-                        <span style="padding:10px">
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Unique Id: @Html.DisplayFor(modelItem => item.ItemNo)
-                        </p>
-                        <p class="card-text">
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </p>
-                        <p class="card-text">
-                            MRP: @Html.DisplayFor(modelItem => item.MRP)
-                        </p>
-                        <p class="card-text">
-                            Min Qty: @Html.DisplayFor(modelItem => item.MinimumQuantity)
-                        </p>
-                        <p class="card-text">
-                            Bulk Rate: @Html.DisplayFor(modelItem => item.BulkPricing)
-                        </p>
-                        <p class="card-text">Other Catalogues
-                            <ul>
-                                <li>Catalogue 1</li>
-                                <li>Catalogue 2</li>
-                                <li>Catalogue 3</li>
-                            </ul>
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <i class="card-icon fas fa-share"></i>
+<div class="container mt-2">
+    <h3>Product List</h3>
+
+    <ul class="nav nav-tabs" id="productTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="productList" aria-selected="true">Product List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="addProduct-tab" data-toggle="tab" href="#addProduct" role="tab" aria-controls="addProduct" aria-selected="false">Add Product</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="productTabContent">
+        <div class="tab-pane fade show active" id="productList" role="tabpanel" aria-labelledby="productList-tab">
+            <div class="card-deck mt-4">
+                @foreach (var item in Model.catalogue.Products)
+                {
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="padding:10px">
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Unique Id: @Html.DisplayFor(modelItem => item.ItemNo)
+                            </p>
+                            <p class="card-text">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </p>
+                            <p class="card-text">
+                                MRP: @Html.DisplayFor(modelItem => item.MRP)
+                            </p>
+                            <p class="card-text">
+                                Min Qty: @Html.DisplayFor(modelItem => item.MinimumQuantity)
+                            </p>
+                            <p class="card-text">
+                                Bulk Rate: @Html.DisplayFor(modelItem => item.BulkPricing)
+                            </p>
+                            <p class="card-text">
+                                Other Catalogues
+                                <ul>
+                                    <li>Catalogue 1</li>
+                                    <li>Catalogue 2</li>
+                                    <li>Catalogue 3</li>
+                                </ul>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <i class="card-icon fas fa-share"></i>
+                        </div>
                     </div>
                 </div>
             </div>
+            }
+                @*<div class="card">
+            <img src="product1.jpg" class="card-img-top" alt="Product 1">
+            <div class="card-body">
+                <h5 class="card-title">Product 1</h5>
+                <p class="card-text">MRP: $20</p>
+            </div>
         </div>
-    }  
+        <div class="card">
+            <img src="product2.jpg" class="card-img-top" alt="Product 2">
+            <div class="card-body">
+                <h5 class="card-title">Product 2</h5>
+                <p class="card-text">MRP: $25</p>
+            </div>
+        </div>*@
+                <!-- Add more product cards here -->
+            </div>
+        </div>
+        <div class="tab-pane fade" id="addProduct" role="tabpanel" aria-labelledby="addProduct-tab">
+            @foreach (var item in Model.allItems)
+            {
+                <div class="card mt-4">
+                    <img src="placeholder.jpg" class="card-img-top" alt="Placeholder">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="card-text">@item.Description</p>
+                        <p class="card-text">@item.MRP</p>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Product
+                        </button>
+                    </div>
+                </div>
+             }
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    @foreach (var item in Model.catalogue.Products)
+    {
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <span style="padding:10px">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </span>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Unique Id: @Html.DisplayFor(modelItem => item.ItemNo)
+                </p>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </p>
+                <p class="card-text">
+                    MRP: @Html.DisplayFor(modelItem => item.MRP)
+                </p>
+                <p class="card-text">
+                    Min Qty: @Html.DisplayFor(modelItem => item.MinimumQuantity)
+                </p>
+                <p class="card-text">
+                    Bulk Rate: @Html.DisplayFor(modelItem => item.BulkPricing)
+                </p>
+                <p class="card-text">
+                    Other Catalogues
+                    <ul>
+                        <li>Catalogue 1</li>
+                        <li>Catalogue 2</li>
+                        <li>Catalogue 3</li>
+                    </ul>
+                </p>
+            </div>
+            <div class="card-footer">
+                <i class="card-icon fas fa-share"></i>
+            </div>
+        </div>
+    </div>
+</div>}
 </div>

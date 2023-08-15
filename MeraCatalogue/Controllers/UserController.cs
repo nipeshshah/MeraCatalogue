@@ -1,4 +1,8 @@
-﻿using System;
+﻿using MeraCatalogue.BL;
+using MeraCatalogue.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -17,21 +21,47 @@ namespace MeraCatalogue.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    //client.BaseAddress = new Uri("https://www.googleapis.com/oauth2/v4/token");
-                    //var content = new FormUrlEncodedContent(new[]
-                    //{
-                    //    new KeyValuePair<string, string>("grant_type", "authorization_code"),
-                    //    new KeyValuePair<string, string>("code", code),
-                    //    new KeyValuePair<string, string>("redirect_uri", "https://localhost:44375/User/Profile"),
-                    //    new KeyValuePair<string, string>("client_id", ConfigurationManager.AppSettings["GoogleClientId"].ToString()),
-                    //    new KeyValuePair<string, string>("client_secret", ConfigurationManager.AppSettings["GoogleClientSecret"].ToString()),
-                    //});
-                    ////client.PostAsync(content)
-                    //var result = client.PostAsync("/", content);
-                    //string resultContent = result.Result.Content.ReadAsStringAsync().Result;
-                    //Console.WriteLine(resultContent);
+                    client.BaseAddress = new Uri("https://www.googleapis.com");
+                    var content = new FormUrlEncodedContent(new[]
+                    {
+                        new KeyValuePair<string, string>("grant_type", "authorization_code"),
+                        new KeyValuePair<string, string>("code", code),
+                        new KeyValuePair<string, string>("redirect_uri", "https://localhost:44375/User/Profile"),
+                        new KeyValuePair<string, string>("client_id", ConfigurationManager.AppSettings["GoogleClientId"].ToString()),
+                        new KeyValuePair<string, string>("client_secret", ConfigurationManager.AppSettings["GoogleClientSecret"].ToString()),
+                    });
+                    //client.PostAsync(content)
+                    var result = client.PostAsync("/oauth2/v4/token", content);
+                    string resultContent = result.Result.Content.ReadAsStringAsync().Result;
+                    var res = (JObject)JsonConvert.DeserializeObject(resultContent);
+                    Console.WriteLine(resultContent);
 
+                    using (var client2 = new HttpClient())
+                    {
+                        client2.BaseAddress = new Uri("https://www.googleapis.com");
+                        client2.DefaultRequestHeaders.Add("Authorization", "Bearer " + res["access_token"]);
+                        //var content2 = new FormUrlEncodedContent(new[]
+                        //{
+                        //    new KeyValuePair<string, string>(),
+                        //});
+                        var result2 = client2.GetAsync("/oauth2/v1/userinfo");
+                        string resultContent2 = result2.Result.Content.ReadAsStringAsync().Result;
+                        var res2 = (JObject)JsonConvert.DeserializeObject(resultContent2);
 
+                        BLHelper bLHelper = new BLHelper();
+                        bLHelper.userHelper.UpdateUserProfile(new GoogleUserProfile()
+                        {
+                            GoogleId = Convert.ToString(res2["id"]),
+                            Name = Convert.ToString(res2["name"]),
+                            GivenName = Convert.ToString(res2["given_name"]),
+                            FamilyName = Convert.ToString(res2["family_name"]),
+                            Image = Convert.ToString(res2["picture"]),
+                            Locale = Convert.ToString(res2["locale"])
+                        });
+
+                        return RedirectToAction("Index", "Catalogue");
+                        
+                    }
 
                 }
             }
@@ -76,6 +106,19 @@ namespace MeraCatalogue.Controllers
 
         public ActionResult Login()
         {
+            if (ConfigurationManager.AppSettings["WithDatabase"].ToString() == "false")
+            {
+                ViewBag.LoggedInUserId = new GoogleUserProfile()
+                {
+                    Id = 1,
+                    GoogleId = "106709470469427785681",
+                    Name = "A BedSheet House",
+                    GivenName = "A BedSheet",
+                    FamilyName = "House",
+                    Image = "https://lh3.googleusercontent.com/a/AAcHTtel4omiHfV6vi7XxAKRft-JchVxTlEI6A9OX_ODziJx=s96-c",
+                    Locale = "en-GB"
+                }.GoogleId;
+            }
             return View();
         }
     }
