@@ -1,4 +1,6 @@
-﻿@{ ViewBag.Title = "Home Page";
+﻿@model MeraCatalogue.Models.GoogleUserProfile
+
+@{ ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_layout_mobile.cshtml"; }
 
 <style>
@@ -19,12 +21,36 @@
             margin-bottom: 10px;
         }
 </style>
-
+<div>@Model</div>
+@if (Model.Name != null && Model.Name.Length > 0)
+{
+<script>
+        $(document).ready(function () {
+            //alert('@Model.Name')
+            localStorage.setItem("ProfileName", '@Model.Name');
+            localStorage.setItem("ProfileGoogleId", '@Model.GoogleLoginId');
+            localStorage.setItem("ProfileEnail", '@Model.Email');
+            $('#urlCatalogue').attr('href', '/Catalogue?UserId=@Model.GoogleLoginId');
+        });
+</script>
+}
+else
+{
+<script>
+        $(document).ready(function () {
+            //alert('@Model.Name')
+            //localStorage.setItem("ProfileName", '@Model.Name');
+            //localStorage.setItem("ProfileGoogleId", '@Model.GoogleLoginId');
+            //localStorage.setItem("ProfileEnail", '@Model.Email');
+            $('#urlCatalogue').attr('href', '/Catalogue?UserId=' + localStorage.getItem("ProfileGoogleId"));
+        });
+</script>
+}
 <div class="container mt-4">
     <h1>Dashboard</h1>
     <div class="row">
         <div class="col-md-3">
-            <a href="Catalogue" class="dashboard-block">
+            <a href="/Catalogue?UserId=@Model.GoogleLoginId" id="urlCatalogue" class="dashboard-block">
                 <i class="fas fa-list-ul"></i>
                 <h5>Catalogues</h5>
             </a>

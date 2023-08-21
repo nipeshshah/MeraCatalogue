@@ -29,6 +29,7 @@ namespace MeraCatalogue.Controllers
                         new KeyValuePair<string, string>("redirect_uri", "https://localhost:44375/User/Profile"),
                         new KeyValuePair<string, string>("client_id", ConfigurationManager.AppSettings["GoogleClientId"].ToString()),
                         new KeyValuePair<string, string>("client_secret", ConfigurationManager.AppSettings["GoogleClientSecret"].ToString()),
+                        new KeyValuePair<string, string>("scope", "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email")
                     });
                     //client.PostAsync(content)
                     var result = client.PostAsync("/oauth2/v4/token", content);
@@ -49,17 +50,22 @@ namespace MeraCatalogue.Controllers
                         var res2 = (JObject)JsonConvert.DeserializeObject(resultContent2);
 
                         BLHelper bLHelper = new BLHelper();
-                        bLHelper.userHelper.UpdateUserProfile(new GoogleUserProfile()
+                        GoogleUserProfile profile = bLHelper.userHelper.UpdateUserProfile(new GoogleUserProfile()
                         {
-                            GoogleId = Convert.ToString(res2["id"]),
+                            GoogleLoginId = Convert.ToString(res2["id"]),
                             Name = Convert.ToString(res2["name"]),
                             GivenName = Convert.ToString(res2["given_name"]),
                             FamilyName = Convert.ToString(res2["family_name"]),
                             Image = Convert.ToString(res2["picture"]),
-                            Locale = Convert.ToString(res2["locale"])
+                            Locale = Convert.ToString(res2["locale"]),
+                            Email = Convert.ToString(res2["email"]),
+                            EmailVerified = Convert.ToBoolean(res2["verified_email"])
                         });
 
-                        return RedirectToAction("Index", "Catalogue");
+                        Session.Add("Profile", profile);
+                        ViewBag.User = profile;
+
+                        return RedirectToAction("Index", "Home", profile);
                         
                     }
 
@@ -111,13 +117,13 @@ namespace MeraCatalogue.Controllers
                 ViewBag.LoggedInUserId = new GoogleUserProfile()
                 {
                     Id = 1,
-                    GoogleId = "106709470469427785681",
+                    GoogleLoginId = "106709470469427785681",
                     Name = "A BedSheet House",
                     GivenName = "A BedSheet",
                     FamilyName = "House",
                     Image = "https://lh3.googleusercontent.com/a/AAcHTtel4omiHfV6vi7XxAKRft-JchVxTlEI6A9OX_ODziJx=s96-c",
                     Locale = "en-GB"
-                }.GoogleId;
+                }.GoogleLoginId;
             }
             return View();
         }

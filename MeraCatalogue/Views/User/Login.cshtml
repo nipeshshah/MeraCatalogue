@@ -4,8 +4,32 @@
     Layout = "~/Views/Shared/_layout_mobile.cshtml";
 }
 
-<h2>Login</h2>
+@*<h2>Login</h2>
 
 <div>@ViewBag.LoggedInUserId</div>
 
-<a class="btn btn-primary" href="https://accounts.google.com/o/oauth2/auth?client_id=957493190972-s8psio9a06qa0adiui0058fo7lcnqjum.apps.googleusercontent.com&redirect_uri=https://localhost:44375/User/Profile&scope=https://www.googleapis.com/auth/userinfo.profile&response_type=code&state=asdafwswdwefwsdg">Goggle Log in</a>
+<a class="btn btn-primary" 
+   >Goggle Log in</a>*@
+
+<script>
+    $(document).ready(){
+        if (localStorage.getItem().length > 0)
+            window.location.href = "/Home/Index"
+    }
+</script>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Login</h4>
+                    <hr>
+                    <a href="https://accounts.google.com/o/oauth2/auth?client_id=957493190972-s8psio9a06qa0adiui0058fo7lcnqjum.apps.googleusercontent.com&redirect_uri=https://localhost:44375/User/Profile&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email&response_type=code&state=asdafwswdwefwsdg" class="btn btn-danger btn-block" disabled>
+                        <i class="fab fa-google"></i> Continue with Google
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

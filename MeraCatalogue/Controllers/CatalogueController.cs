@@ -78,6 +78,19 @@ namespace MeraCatalogue.Controllers
             return View("Index");
         }
 
+        [HttpPost]
+        public ActionResult AddProduct(FormCollection collection)
+        {
+            BLHelper bLHelper = new BLHelper();
+            //bLHelper.cataHelper.AddProduct(new Catalogue()
+            //{
+            //    //CatalogueId = new Random().Next(1, 9999).ToString(), //Company code + Unique Identification Number
+            //    UserId = collection[1],
+            //    Title = collection[2],
+            //    Description = collection[3]
+            //});
+            return View("Index");
+        }
 
         //public ActionResult View()
         //{

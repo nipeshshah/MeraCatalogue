@@ -9,13 +9,14 @@ namespace MeraCatalogue.Models
     public class GoogleUserProfile
     {
         public int Id { get; set; }
-        public string GoogleId { get; set; }
+        public string GoogleLoginId { get; set; }
         public string Name { get; set; }
         public string GivenName { get; set; }
         public string FamilyName { get; set; }
         public string Image { get; set; }
         public string Locale { get; set; }
-
+        public string Email { get; set; }
+        public bool EmailVerified { get; set; }
     }
     public class CatalogueList
     {

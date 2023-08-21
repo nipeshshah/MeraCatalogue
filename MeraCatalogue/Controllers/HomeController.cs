@@ -10,9 +10,9 @@ namespace MeraCatalogue.Controllers
 {
     public class HomeController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(MeraCatalogue.Models.GoogleUserProfile profile)
         {
-            return View();
+            return View(profile);
         }
 
         public ActionResult About()
